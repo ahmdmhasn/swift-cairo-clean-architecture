@@ -10,6 +10,8 @@
 		023987912A2D58E700E04F0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023987902A2D58E700E04F0D /* AppDelegate.swift */; };
 		0239879A2A2D58E800E04F0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023987992A2D58E800E04F0D /* Assets.xcassets */; };
 		0239879D2A2D58E800E04F0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0239879B2A2D58E800E04F0D /* LaunchScreen.storyboard */; };
+		023987A82A2D599100E04F0D /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023987A72A2D599100E04F0D /* Tweet.swift */; };
+		023987AA2A2D59A900E04F0D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023987A92A2D59A900E04F0D /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		023987992A2D58E800E04F0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0239879C2A2D58E800E04F0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0239879E2A2D58E800E04F0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		023987A72A2D599100E04F0D /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		023987A92A2D59A900E04F0D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,7 @@
 		0239878F2A2D58E700E04F0D /* SwiftCairo */ = {
 			isa = PBXGroup;
 			children = (
+				023987A62A2D598200E04F0D /* Entity */,
 				023987A52A2D591000E04F0D /* Classes */,
 				023987A42A2D590500E04F0D /* Resources */,
 			);
@@ -72,6 +77,15 @@
 				023987902A2D58E700E04F0D /* AppDelegate.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		023987A62A2D598200E04F0D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				023987A72A2D599100E04F0D /* Tweet.swift */,
+				023987A92A2D59A900E04F0D /* User.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				023987912A2D58E700E04F0D /* AppDelegate.swift in Sources */,
+				023987A82A2D599100E04F0D /* Tweet.swift in Sources */,
+				023987AA2A2D59A900E04F0D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
