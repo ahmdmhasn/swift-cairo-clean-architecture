@@ -1,3 +1,5 @@
+import Foundation
+
 extension TweetData {
     func toDomain() -> Tweet {
         let formatter = ISO8601DateFormatter()
