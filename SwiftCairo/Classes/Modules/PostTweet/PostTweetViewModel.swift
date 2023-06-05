@@ -14,6 +14,7 @@ final class PostTweetInput: ObservableObject {
 /// PostTweetOutput
 final class PostTweetOutput: ObservableObject {
     @Published fileprivate(set) var tweetEnabled = false
+    @Published fileprivate(set) var tweetAdded = false
 }
 
 /// TimelineViewModel
@@ -59,9 +60,9 @@ private extension PostTweetViewModel {
         Task {
             do {
                 let tweetAdded = try await postTweetUseCase.execute(tweetText: input.tweetText)
-//                completion(.success(tweet))
+                output.tweetAdded = tweetAdded
             } catch {
-//                completion(.failure(error))
+                // Handle the received error
             }
         }
     }
