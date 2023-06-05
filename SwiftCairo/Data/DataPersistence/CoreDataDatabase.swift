@@ -1,6 +1,6 @@
 import CoreData
 
-class CoreDataDatabase: LocalDatabase {
+final class CoreDataDatabase: LocalDatabase {
     private let persistentContainer: NSPersistentContainer
     
     init() {
