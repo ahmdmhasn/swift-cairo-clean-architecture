@@ -7,14 +7,23 @@ protocol PostTweetViewModelType {
 
 /// PostTweetInput
 final class PostTweetInput: ObservableObject {
+    /// Published tweet content
     @Published var tweetText: String = ""
-    let postTweetTrigger = PassthroughSubject<Void, Never>()
+    
+    /// Trigger for when a tweet is posted
+    let postTweetTrigger = CurrentValueSubject<Void, Never>(())
 }
 
 /// PostTweetOutput
 final class PostTweetOutput: ObservableObject {
-    @Published fileprivate(set) var tweetEnabled = false
-    let tweetAddedPublisher = PassthroughSubject<Void, Never>()
+    /// Published flag indicating whether tweeting is enabled
+    @Published fileprivate(set) var isTweetEnabled = false
+    
+    /// PassthroughSubject for when a tweet is added
+    fileprivate let tweetAdded = PassthroughSubject<Void, Never>()
+
+    /// Publisher for when a tweet is added
+    var tweetAddedPublisher: AnyPublisher<Void, Never> { tweetAdded.eraseToAnyPublisher() }
 }
 
 /// TimelineViewModel
@@ -48,7 +57,7 @@ private extension PostTweetViewModel {
     func configureOutputObservers() {
         input.$tweetText
             .map { text in text.isEmpty == false }
-            .assign(to: &output.$tweetEnabled)
+            .assign(to: &output.$isTweetEnabled)
     }
 }
 
@@ -60,7 +69,7 @@ private extension PostTweetViewModel {
             do {
                 let tweetAdded = try await postTweetUseCase.execute(tweetText: input.tweetText)
                 if tweetAdded {
-                    output.tweetAddedPublisher.send()
+                    output.tweetAdded.send()
                 }
             } catch {
                 // Handle the received error

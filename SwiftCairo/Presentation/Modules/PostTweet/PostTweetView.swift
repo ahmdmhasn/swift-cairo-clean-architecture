@@ -44,7 +44,7 @@ struct PostTweetView: View {
                 }
                 .padding()
                 .buttonStyle(PlainButtonStyle())
-                .disabled(!output.tweetEnabled)
+                .disabled(!output.isTweetEnabled)
                 
                 Spacer()
             }
