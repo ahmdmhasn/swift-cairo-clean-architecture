@@ -53,11 +53,11 @@ final class TimelineViewModel: TimelineViewModelType {
 private extension TimelineViewModel {
     func configureInputObservers() {
         input.fetchTweetsTrigger
-            .sink { [self] in fetchTweets() }
+            .sink { [weak self] in self?.fetchTweets() }
             .store(in: &subscriptions)
         
         input.createTweetTrigger
-            .sink { [self] in coordinator.displayPostTweet() }
+            .sink { [weak self] in self?.coordinator.displayPostTweet() }
             .store(in: &subscriptions)
     }
     
