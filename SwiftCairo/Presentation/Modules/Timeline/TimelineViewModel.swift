@@ -7,14 +7,22 @@ protocol TimelineViewModelType {
 
 /// TimelineInput
 final class TimelineInput: ObservableObject {
+    /// Publisher for when tweets should be fetched
     let fetchTweetsTrigger = PassthroughSubject<Void, Never>()
+    
+    /// Publisher for when a tweet should be created
     let createTweetTrigger = PassthroughSubject<Void, Never>()
 }
 
 /// TimelineOutput
 final class TimelineOutput: ObservableObject {
+    /// Published tweets
     @Published fileprivate(set) var tweets: [Tweet] = []
+    
+    /// Published state
     @Published fileprivate(set) var state: TimelineState = .idle
+    
+    /// Published error
     @Published fileprivate(set) var error: Error?
 }
 
