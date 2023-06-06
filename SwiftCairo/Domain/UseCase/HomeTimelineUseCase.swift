@@ -16,20 +16,20 @@ protocol TimelineUseCase {
 }
 
 /// A default implementation of the `TimelineUseCase` protocol that fetches the
-/// home timeline from a `TweetDataSource`.
+/// home timeline from a `TweetRepository`.
 final class DefaultTimelineUseCase: TimelineUseCase {
-    private let dataSource: TweetDataSource
+    private let repository: TweetRepository
     
     /// Creates a new `DefaultTimelineUseCase` instance.
     ///
-    /// - Parameter dataSource: The `TweetDataSource` to use for fetching the home timeline.
-    init(dataSource: TweetDataSource) {
-        self.dataSource = dataSource
+    /// - Parameter repository: The `TweetDataSource` to use for fetching the home timeline.
+    init(repository: TweetRepository) {
+        self.repository = repository
     }
     
     func fetchHomeTimeline() async throws -> [Tweet] {
         do {
-            let tweets = try await dataSource.fetchTimeline()
+            let tweets = try await repository.fetchTimeline()
             if tweets.isEmpty {
                 throw TimelineError.emptyResults
             }

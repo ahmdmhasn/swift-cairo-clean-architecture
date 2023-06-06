@@ -15,11 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let navigationController = UINavigationController()
-        let tweetDataSource = TweetRepository(twitterAPI: ServiceLocator.twitterAPI,
-                                              localDatabase: ServiceLocator.localDatabase)
+        let tweetRepository = DefaultTweetRepository(twitterAPI: ServiceLocator.twitterAPI,
+                                                     localDatabase: ServiceLocator.localDatabase)
         let coordinator = TweetsCoordinator(navigationController: navigationController,
                                             notificationCenter: .default,
-                                            tweetDataSource: tweetDataSource)
+                                            tweetRepository: tweetRepository)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController

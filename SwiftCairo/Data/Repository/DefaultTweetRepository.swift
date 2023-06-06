@@ -1,6 +1,6 @@
 import Foundation
 
-final class TweetRepository: TweetDataSource {
+final class DefaultTweetRepository: TweetRepository {
     private let twitterAPI: TwitterAPI
     private let localDatabase: LocalDatabase
     

@@ -7,20 +7,20 @@ protocol PostTweetCoordinator {
 
 /// The coordinator for the tweets feature, responsible for setting up and managing the view hierarchy.
 final class TweetsCoordinator {
-    private let tweetDataSource: TweetDataSource
+    private let tweetRepository: TweetRepository
     private let notificationCenter: NotificationCenter
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController,
          notificationCenter: NotificationCenter,
-         tweetDataSource: TweetDataSource) {
+         tweetRepository: TweetRepository) {
         self.navigationController = navigationController
         self.notificationCenter = notificationCenter
-        self.tweetDataSource = tweetDataSource
+        self.tweetRepository = tweetRepository
     }
 
     func start() {
-        let useCase = DefaultTimelineUseCase(dataSource: tweetDataSource)
+        let useCase = DefaultTimelineUseCase(repository: tweetRepository)
         let viewModel = TimelineViewModel(timelineUseCase: useCase, coordinator: self)
         let viewController = TimelineViewController(viewModel: viewModel)
         navigationController.pushViewController(viewController, animated: true)
@@ -31,7 +31,7 @@ extension TweetsCoordinator: PostTweetCoordinator {
     func displayPostTweet() {
         let tweetNotifier = DefaultTweetNotifier(notificationCenter: notificationCenter)
         let postTweetUseCase = DefaultPostTweetUseCase(sessionManager: ServiceLocator.sessionManager,
-                                                       dataSource: tweetDataSource,
+                                                       repository: tweetRepository,
                                                        notifier: tweetNotifier)
         let viewModel = PostTweetViewModel(postTweetUseCase: postTweetUseCase)
         let viewController = PostTweetHostingController(viewModel: viewModel)

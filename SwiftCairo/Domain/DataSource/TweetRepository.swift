@@ -1,5 +1,5 @@
 /// A protocol that defines methods for fetching and posting tweets.
-protocol TweetDataSource {
+protocol TweetRepository {
     /// Fetches the timeline of tweets for the current user.
     ///
     /// - Returns: An array of `Tweet` objects representing the timeline.

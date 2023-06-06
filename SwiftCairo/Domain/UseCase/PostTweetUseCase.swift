@@ -22,19 +22,19 @@ protocol PostTweetUseCase {
 /// notifies listeners using a `TweetNotifier`.
 class DefaultPostTweetUseCase: PostTweetUseCase {
     private let sessionManager: SessionManager
-    private let dataSource: TweetDataSource
+    private let repository: TweetRepository
     private let notifier: TweetNotifier
     
     /// Creates a new `DefaultPostTweetUseCase` instance.
     ///
     /// - Parameter sessionManager: The `SessionManager` to use for retrieving the current user.
-    /// - Parameter dataSource: The `TweetDataSource` to use for posting the tweet.
+    /// - Parameter dataSource: The `TweetRepository` to use for posting the tweet.
     /// - Parameter notifier: The `TweetNotifier` to use for notifying listeners when a tweet is posted.
     init(sessionManager: SessionManager,
-         dataSource: TweetDataSource,
+         repository: TweetRepository,
          notifier: TweetNotifier) {
         self.sessionManager = sessionManager
-        self.dataSource = dataSource
+        self.repository = repository
         self.notifier = notifier
     }
 
@@ -49,7 +49,7 @@ class DefaultPostTweetUseCase: PostTweetUseCase {
                           createdAt: Date())
         
         do {
-            let result = try await dataSource.postTweet(tweet)
+            let result = try await repository.postTweet(tweet)
             if result {
                 notifier.didPostTweet(tweet)
             }
