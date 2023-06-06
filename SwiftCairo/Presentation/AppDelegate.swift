@@ -13,19 +13,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        /// Provide access to default `LocalDatabase`
+        let localDatabase: LocalDatabase = CoreDataDatabase()
+        
+        /// Provide access to default `TwitterAPI`
+        let twitterAPI: TwitterAPI = URLSessionTwitterAPI(session: .shared)
+
+        /// Default `TweetRepository`
+        let tweetRepository = DefaultTweetRepository(twitterAPI: twitterAPI,
+                                                     localDatabase: localDatabase)
+
+        let useCase = DefaultTimelineUseCase(repository: tweetRepository)
+        let viewModel = TimelineViewModel(timelineUseCase: useCase)
+        let viewController = TimelineViewController(viewModel: viewModel)
+
         let navigationController = UINavigationController()
-        let tweetRepository = DefaultTweetRepository(twitterAPI: ServiceLocator.twitterAPI,
-                                                     localDatabase: ServiceLocator.localDatabase)
-        let coordinator = TweetsCoordinator(navigationController: navigationController,
-                                            notificationCenter: .default,
-                                            tweetRepository: tweetRepository)
+        navigationController.pushViewController(viewController, animated: true)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
-        coordinator.start()
         
         return true
     }

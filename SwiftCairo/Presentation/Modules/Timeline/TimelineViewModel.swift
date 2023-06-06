@@ -32,17 +32,14 @@ final class TimelineViewModel: TimelineViewModelType {
     let output: TimelineOutput
     
     private let timelineUseCase: TimelineUseCase
-    private let coordinator: PostTweetCoordinator
     private var subscriptions: Set<AnyCancellable> = []
 
     init(input: TimelineInput = TimelineInput(),
          output: TimelineOutput = TimelineOutput(),
-         timelineUseCase: TimelineUseCase,
-         coordinator: PostTweetCoordinator) {
+         timelineUseCase: TimelineUseCase) {
         self.input = input
         self.output = output
         self.timelineUseCase = timelineUseCase
-        self.coordinator = coordinator
         configureInputObservers()
         configureOutputObservers()
     }
@@ -57,7 +54,9 @@ private extension TimelineViewModel {
             .store(in: &subscriptions)
         
         input.createTweetTrigger
-            .sink { [self] in coordinator.displayPostTweet() }
+            .sink {
+                // Handle Coordination
+            }
             .store(in: &subscriptions)
     }
     
