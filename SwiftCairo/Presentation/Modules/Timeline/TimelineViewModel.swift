@@ -50,7 +50,7 @@ final class TimelineViewModel: TimelineViewModelType {
 private extension TimelineViewModel {
     func configureInputObservers() {
         input.fetchTweetsTrigger
-            .sink { [self] in fetchTweets() }
+            .sink { [weak self] in self?.fetchTweets() }
             .store(in: &subscriptions)
         
         input.createTweetTrigger

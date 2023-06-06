@@ -14,7 +14,7 @@ final class PostTweetInput: ObservableObject {
 /// PostTweetOutput
 final class PostTweetOutput: ObservableObject {
     @Published fileprivate(set) var tweetEnabled = false
-    @Published fileprivate(set) var tweetAdded = false
+    let tweetAddedPublisher = PassthroughSubject<Void, Never>()
 }
 
 /// TimelineViewModel
@@ -41,15 +41,14 @@ final class PostTweetViewModel: PostTweetViewModelType {
 private extension PostTweetViewModel {
     func configureInputObservers() {
         input.postTweetTrigger
-            .sink { [self] in postTweet() }
+            .sink { [weak self] in self?.postTweet() }
             .store(in: &subscriptions)
     }
     
     func configureOutputObservers() {
         input.$tweetText
             .map { text in text.isEmpty == false }
-            .assign(to: \.tweetEnabled, on: output)
-            .store(in: &subscriptions)
+            .assign(to: &output.$tweetEnabled)
     }
 }
 
@@ -60,7 +59,9 @@ private extension PostTweetViewModel {
         Task {
             do {
                 let tweetAdded = try await postTweetUseCase.execute(tweetText: input.tweetText)
-                output.tweetAdded = tweetAdded
+                if tweetAdded {
+                    output.tweetAddedPublisher.send()
+                }
             } catch {
                 // Handle the received error
             }
