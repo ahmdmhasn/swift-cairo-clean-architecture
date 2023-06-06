@@ -18,7 +18,6 @@ final class CoreDataDatabase: LocalDatabase {
             tweets.forEach { tweet in
                 let tweetEntity = TweetEntity(context: context)
                 let userEntity = UserEntity(context: context)
-                userEntity.update(with: tweet.user)
                 tweetEntity.update(with: tweet)
                 tweetEntity.user = userEntity
             }

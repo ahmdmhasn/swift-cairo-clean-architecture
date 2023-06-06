@@ -12,7 +12,6 @@ extension TweetEntity {
     public func toDomain() -> Tweet {
         return Tweet(id: id,
                      text: text,
-                     user: user.toDomain(),
                      createdAt: createdAt)
     }
 }
