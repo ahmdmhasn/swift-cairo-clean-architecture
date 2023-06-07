@@ -113,7 +113,7 @@
 		023987A52A2D591000E04F0D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				0239880D2A2E8DF100E04F0D /* Services */,
+				0239880D2A2E8DF100E04F0D /* Framework */,
 				023988092A2E8D1B00E04F0D /* Modules */,
 				023987902A2D58E700E04F0D /* AppDelegate.swift */,
 			);
@@ -255,12 +255,12 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		0239880D2A2E8DF100E04F0D /* Services */ = {
+		0239880D2A2E8DF100E04F0D /* Framework */ = {
 			isa = PBXGroup;
 			children = (
 				0239880E2A2E8DFA00E04F0D /* DefaultTweetNotifier.swift */,
 			);
-			path = Services;
+			path = Framework;
 			sourceTree = "<group>";
 		};
 		023988122A2E9A7E00E04F0D /* Timeline */ = {
